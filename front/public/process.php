@@ -26,6 +26,7 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
     $childHeader = 0;
     $fatherHeader = 0;
     $motherHeader = 0;
+    $certifier = 0;
     for($i = 0; $i < $counter-1; $i++){
         if(!is_array($_POST[$postArrayKeys[$i]])) {
             $value = strval($postArrayKeys[$i]);
@@ -47,6 +48,11 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     $person = "Father";
                     if($fatherHeader == 0){
                         echo "<h3>Father's Details Part</h3>";$fatherHeader++;
+                    }
+                }else if(str_contains($value,'certifier')){
+                    $person = "Certifier";
+                    if($fatherHeader == 0){
+                        echo "<h3>Certifier's Details Part</h3>";$certifier++;
                     }
                 }
                 $prnt = '';
