@@ -51,7 +51,7 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     }
                 }else if(str_contains($value,'certifier')){
                     $person = "Certifier";
-                    if($fatherHeader == 0){
+                    if($certifier == 0){
                         echo "<h3>Certifier's Details Part</h3>";$certifier++;
                     }
                 }
@@ -70,8 +70,8 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     $prnt->display_error();
                     unset($nameX);
                 }else if(str_contains($value, 'MiddleName')){
-                    $nameX = new nameValidator($_POST[$value], "$person's Middle Name");
-                    $errors = $nameX->validate_name();
+                    $nameX = new middleNameValidator($_POST[$value], "$person's Middle Name");
+                    $errors = $nameX->validate_m_name();
                     $prnt = new errorDisplay($errors,"Middle Name",$nameX,$_POST[$value]);
                     $prnt->display_error();
                     unset($nameX);
