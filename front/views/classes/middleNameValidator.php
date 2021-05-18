@@ -14,7 +14,7 @@ class middleNameValidator
         $name = $this->part;
         $errors=[];
         if(empty($name)){
-            $errors[]= '"<span style="color: #1a1a1a">'.$this->vName.'</span>" is Empty';
+            $errors[]= '"<span style="color: #1a1a1a">'.$this->vName.'</span>" = Empty';
         }
         else if(!ctype_alpha($name)){
             $errors[] ='"<span style="color: #1a1a1a">'.$this->vName.'</span>" should be Alphabet only';
@@ -23,9 +23,11 @@ class middleNameValidator
     }
     function error_print($ar){
         echo "<ul>";
+        foreach ($ar as $error) {
             echo '<li style="color: red">';
-            echo "$ar";
+            echo "$error";
             echo "</li>";
+        }
         echo "</ul>";
 
     }
