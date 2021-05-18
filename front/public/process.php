@@ -27,6 +27,8 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
     $fatherHeader = 0;
     $motherHeader = 0;
     $certifier = 0;
+    $customInputs = array('Place','State','Country','Code','Location', 'Tele','Url','Facility');
+    $customOutputs = array('Birth Place','State of Residency','Country','Zip Code','Location', 'Telephone','Url','Birth Facility');
     for($i = 0; $i < $counter-1; $i++){
         if(!is_array($_POST[$postArrayKeys[$i]])) {
             $value = strval($postArrayKeys[$i]);
@@ -49,14 +51,13 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     if($fatherHeader == 0){
                         echo "<h3>Father's Details Part</h3>";$fatherHeader++;
                     }
-                }else if(str_contains($value,'certifier')){
+                }else if(str_contains($value,'certif')){
                     $person = "Certifier";
                     if($certifier == 0){
                         echo "<h3>Certifier's Details Part</h3>";$certifier++;
                     }
                 }
                 $prnt = '';
-
                 if (str_contains($value, 'firstName')) {
                     $nameX = new nameValidator($_POST[$value], "$person's First Name");
                     $errors = $nameX->validate_name();
@@ -75,10 +76,35 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     $prnt = new errorDisplay($errors,"Middle Name",$nameX,$_POST[$value]);
                     $prnt->display_error();
                     unset($nameX);
-                }else{
-                    $nameX = new nameValidator($_POST[$value], "$value");
+                }else if(str_contains($value, 'Suffix')){
+                    $nameX = new middleNameValidator($_POST[$value], "$person's Suffix");
+                    $errors = $nameX->validate_m_name();
+                    $prnt = new errorDisplay($errors,"Suffix",$nameX,$_POST[$value]);
+                    $prnt->display_error();
+                    unset($nameX);
+                }else if(str_contains($value, 'Gender')){
+                    $nameX = new nameValidator($_POST[$value], "$person's Gender");
                     $errors = $nameX->validate_name();
-                    $prnt = new errorDisplay($errors,"$value",$nameX,$_POST[$value]);
+                    $prnt = new errorDisplay($errors,"Gender",$nameX,$_POST[$value]);
+                    $prnt->display_error();
+                    unset($nameX);
+                }else if(str_contains($value, 'Hospital')){
+                    $nameX = new notEmpty($_POST[$value], "Referred Hospital Name");
+                    $errors = $nameX->validate_input();
+                    $prnt = new errorDisplay($errors,"Referred Hospital Name",$nameX,$_POST[$value]);
+                    $prnt->display_error();
+                    unset($nameX);
+                }else{
+                    $value2 = '';
+                    for($j = 0; $j < count($customInputs); $j++){
+                        if(str_contains($value, $customInputs[$j])){
+                            $value2 = $customOutputs[$j];
+                            break;
+                        }
+                    }
+                    $nameX = new notEmpty($_POST[$value], "$person's $value2");
+                    $errors = $nameX->validate_input();
+                    $prnt = new errorDisplay($errors,"$person's $value2",$nameX,$_POST[$value]);
                     $prnt->display_error();
                     unset($nameX);
                 }
