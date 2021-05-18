@@ -13,6 +13,11 @@ function autoloader($className) {
 }
 spl_autoload_register('autoloader');
 
+if (!function_exists('str_contains')) {
+    function str_contains($haystack, $needle) {
+        return ($needle !== '' && mb_strpos($haystack, $needle) !== false);
+    }
+}
 /*    ~~~~~~~~~~~~~Post method~~~~~~~~~~~~~~~~~    */
 if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
 //    $childFirstNameX = new nameValidator($_POST['childfirstName'],"Child's First Name");

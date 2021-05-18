@@ -79,8 +79,8 @@ include_once('front/views/elements/head.php');
                                             <input type="text" id="childBirthLocation" class="form-control" name="childBirthLocation">
                                         </div>
                                         <div class="col-md-12">
-                                            <label for="childBirthCounty" class="col-form-label">County of Birth</label>
-                                            <input type="text" id="childBirthCounty" class="form-control" name="childBirthCounty">
+                                            <label for="childBirthCountry" class="col-form-label">County of Birth</label>
+                                            <input type="text" id="childBirthCountry" class="form-control" name="childBirthCountry">
                                         </div>
                                     </div>
                                 </div><!--~~~~ Child's Details Form End ~~~~-->
