@@ -29,6 +29,5 @@ class nameValidator
             echo "</li>";
         }
         echo "</ul>";
-
     }
 }

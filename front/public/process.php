@@ -64,9 +64,13 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                 }
                 $prnt = '';
                 if (str_contains($value, 'firstName')) {
-                    $nameX = new nameValidator($_POST[$value], "$person's First Name");
+                    $nameX = new fullName($_POST[$value], "$person's First Name");
+//                    $nameX = new nameValidator($_POST[$value], "$person's First Name");
                     $errors = $nameX->validate_name();
+//                    $errors = $nameX->validate_name();
+//                    $prnt = new errorDisplay($errors,"First Name",$nameX,$_POST[$value]);
                     $prnt = new errorDisplay($errors,"First Name",$nameX,$_POST[$value]);
+//                    $prnt->display_error();
                     $prnt->display_error();
                     unset($nameX);
                 }else if(str_contains($value, 'LastName')){
