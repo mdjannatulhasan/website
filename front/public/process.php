@@ -88,9 +88,10 @@ if(strtoupper($_SERVER['REQUEST_METHOD']) == 'POST'){
                     $prnt->display_error();
                     unset($nameX);
                 }else if(str_contains($value, 'Gender')){
-                    $nameX = new nameValidator($_POST[$value], "$person's Gender");
+                    $sex = array('Male','Female','Other');
+                    $nameX = new nameValidator($sex[$_POST[$value]], "$person's Gender");
                     $errors = $nameX->validate_name();
-                    $prnt = new errorDisplay($errors,"Gender",$nameX,$_POST[$value]);
+                    $prnt = new errorDisplay($errors, "Gender", $nameX, $sex[$_POST[$value]]);
                     $prnt->display_error();
                     unset($nameX);
                 }else if(str_contains($value, 'Hospital')){
